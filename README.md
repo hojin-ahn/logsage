@@ -61,9 +61,8 @@ lib/
 2. When time is matched, the alarm rings and plays a sound.
 3. A math question is shown (e.g., 273 + 581 = ?).
 4. If the correct answer is entered, the alarm stops. If not, logs are stored.
-5. Every minute, logs are auto-uploaded and sent to a FastAPI backend.
-6. The backend summarizes the logs using OpenAI (GPT) and returns suggestions or insights.
-7. The summary is shown in a developer dashboard inside the app.
+5. The backend summarizes the logs using OpenAI (GPT) and returns suggestions or insights.
+6. The summary is shown in a developer dashboard inside the app.
 
 ---
 

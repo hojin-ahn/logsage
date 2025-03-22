@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'core/utils/alarm_checker.dart';
-import 'core/utils/logger.dart';
 import 'data/datasources/log_remote_datasource.dart';
 import 'data/repositories/log_repository_impl.dart';
 import 'domain/usecases/analyze_logs.dart';
@@ -42,15 +41,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     Future.delayed(Duration.zero, () {
       final alarmProvider = Provider.of<AlarmProvider>(context, listen: false);
-      final logProvider = Provider.of<LogProvider>(context, listen: false);
-
       AlarmChecker.start(context, alarmProvider.alarms);
-      Logger.scheduleAutoUpload(() async {
-        final result = await logProvider.analyze();
-        if (result != null) {
-          debugPrint("[AUTO-UPLOAD] ANALYSIS REPORT:\n\n${result.summary}");
-        }
-      });
     });
   }
 

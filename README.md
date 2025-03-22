@@ -6,13 +6,13 @@ An AI-powered smart alarm app where you must solve a math problem to stop the al
 
 ## Features
 
-- 🕒 **Alarm Scheduler**: Set alarms for specific days of the week and times.
-- 🧮 **Math Problem Alarm**: Solve a 3-digit addition problem to dismiss the alarm.
-- 🔊 **Sound Playback**: Repeating alarm sound until the correct answer is entered or time runs out.
-- ⏰ **Auto Timeout**: Alarm stops after 60 seconds with warning logged.
-- 📦 **Event Logger**: All major app actions are logged with timestamps.
-- 🤖 **AI Log Analysis**: Logs are sent to a FastAPI backend and summarized by OpenAI.
-- 📊 **Insight View**: Summarized results are displayed in-app for developers or testers.
+- **Alarm Scheduler**: Set alarms for specific days of the week and times.
+- **Math Problem Alarm**: Solve a 3-digit addition problem to dismiss the alarm.
+- **Sound Playback**: Repeating alarm sound until the correct answer is entered or time runs out.
+- **Auto Timeout**: Alarm stops after 60 seconds with warning logged.
+- **Event Logger**: All major app actions are logged with timestamps.
+- **AI Log Analysis**: Logs are sent to a FastAPI backend and summarized by OpenAI.
+- **Insight View**: Summarized results are displayed in-app for developers or testers.
 
 ---
 

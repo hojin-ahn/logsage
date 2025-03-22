@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class Alarm {
   final int id;
   final TimeOfDay time;
-  final List<int> days; // 0=Sun ~ 6=Sat
+  final List<int> days;
   final bool isEnabled;
 
   Alarm({

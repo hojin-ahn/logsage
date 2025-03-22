@@ -27,7 +27,7 @@ class LogProvider with ChangeNotifier {
       final logs = Logger.logs;
       final result = await analyzeLogsUseCase(logs);
       _result = result;
-      Logger.clear(); // 분석 후 로그 초기화
+      Logger.clear();
       return result;
     } catch (e) {
       _error = e.toString();

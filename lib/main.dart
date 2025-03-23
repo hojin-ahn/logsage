@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:logsage/core/utils/alarm_force_checker.dart';
 import 'package:logsage/core/utils/exact_alarm_permission_helper.dart';
+import 'package:logsage/core/utils/notification_permission_helper.dart';
 import 'package:timezone/data/latest.dart' as tzData;
 import 'package:logsage/core/utils/notification_helper.dart';
 import 'package:logsage/core/utils/notification_router.dart';
@@ -62,6 +63,8 @@ class _MyAppState extends State<MyApp> {
     super.initState();
 
     WidgetsBinding.instance.addPostFrameCallback((_) async {
+      await NotificationPermissionHelper
+          .requestNotificationPermissionIfNeeded();
       await ExactAlarmPermissionHelper.requestPermissionIfNeeded();
       final alarmProvider = Provider.of<AlarmProvider>(context, listen: false);
       await alarmProvider.loadAlarms();

@@ -7,6 +7,18 @@ class NotificationHelper {
   static final FlutterLocalNotificationsPlugin _notificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
+  static const String _channelId = 'alarm_channel_id_2';
+  static const AndroidNotificationChannel _alarmChannel =
+      AndroidNotificationChannel(
+    _channelId,
+    'Alarms',
+    description: 'Channel for alarm notifications',
+    importance: Importance.max,
+    playSound: true,
+    enableVibration: true,
+    showBadge: true,
+  );
+
   static Future<void> initialize({Function(int)? onNotificationTap}) async {
     tzData.initializeTimeZones();
 
@@ -26,6 +38,12 @@ class NotificationHelper {
         }
       },
     );
+
+    // Create custom channel explicitly
+    await _notificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(_alarmChannel);
   }
 
   static Future<void> scheduleAlarm({
@@ -35,18 +53,22 @@ class NotificationHelper {
     required tz.TZDateTime scheduledTime,
   }) async {
     try {
-      Logger.log('[NOTIFICATION] Scheduling alarm ID=$id at \$scheduledTime');
+      Logger.log('[NOTIFICATION] Scheduling alarm ID=\$id at \$scheduledTime');
+
       await _notificationsPlugin.zonedSchedule(
         id,
         title,
         body,
         scheduledTime,
-        const NotificationDetails(
+        NotificationDetails(
           android: AndroidNotificationDetails(
-            'alarm_channel_id',
-            'Alarms',
+            _channelId,
+            _alarmChannel.name,
+            channelDescription: _alarmChannel.description,
             importance: Importance.max,
             priority: Priority.high,
+            playSound: true,
+            enableVibration: true,
             fullScreenIntent: true,
           ),
         ),
@@ -56,14 +78,15 @@ class NotificationHelper {
         matchDateTimeComponents: DateTimeComponents.dayOfWeekAndTime,
         payload: id.toString(),
       );
-      Logger.log('[NOTIFICATION] ✅ Alarm ID=$id scheduled successfully');
+
+      Logger.log('[NOTIFICATION] ✅ Alarm ID=\$id scheduled successfully');
     } catch (e) {
-      Logger.log('[NOTIFICATION] ❌ Failed to schedule alarm ID=$id: \$e');
+      Logger.log('[NOTIFICATION] ❌ Failed to schedule alarm ID=\$id: \$e');
     }
   }
 
   static Future<void> cancelAlarm(int id) async {
     await _notificationsPlugin.cancel(id);
-    Logger.log('[NOTIFICATION] Cancelled alarm ID=$id');
+    Logger.log('[NOTIFICATION] Cancelled alarm ID=\$id');
   }
 }

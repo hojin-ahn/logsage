@@ -60,14 +60,14 @@ class AlarmHomePage extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () => _openAddAlarmDialog(context),
-            child: const Text('Adding Alarm'),
+            child: const Text('ADD AN ALARM'),
           ),
           ElevatedButton(
             onPressed: () => Navigator.push(
               context,
               MaterialPageRoute(builder: (_) => const LogAnalyzerPage()),
             ),
-            child: const Text('Log Analysis Summary'),
+            child: const Text('LOG ANALYSIS SUMMARY'),
           ),
           const SizedBox(height: 16),
         ],
@@ -91,7 +91,8 @@ class AlarmHomePage extends StatelessWidget {
     if (selectedDays == null || selectedDays.isEmpty) return;
 
     final provider = Provider.of<AlarmProvider>(context, listen: false);
-    final newId = DateTime.now().millisecondsSinceEpoch;
+    final rawId = DateTime.now().millisecondsSinceEpoch;
+    final newId = rawId % 1000000000;
 
     final newAlarm = Alarm(
       id: newId,
